@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import org.approvaltests.Approvals;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,11 @@ class GildedRoseTest {
                 sellIns,
                 qualities
         );
+    }
+
+    @Test
+    void conjuredItem() {
+        Approvals.verify(updateQuality("Conjured Pot", 2, 10));
     }
 
     private Item updateQuality(String name, int sellIn, int quality) {

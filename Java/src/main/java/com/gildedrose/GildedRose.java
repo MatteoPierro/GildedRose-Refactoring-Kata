@@ -30,6 +30,10 @@ class GildedRose {
             return new SulfurasItemUpdater();
         }
 
+        if (item.name.contains("Conjured")) {
+            return new ConjuredItemUpdater();
+        }
+
         return new NormalItemUpdater();
     }
 }
