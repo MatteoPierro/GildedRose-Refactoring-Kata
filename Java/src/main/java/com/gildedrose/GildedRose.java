@@ -14,21 +14,22 @@ class GildedRose {
     }
 
     private void update(Item item) {
+        updaterFor(item).update(item);
+    }
+
+    private ItemUpdater updaterFor(Item item) {
         if (item.name.equals("Aged Brie")) {
-            new AgedBrieItemUpdater().update(item);
-            return;
+            return new AgedBrieItemUpdater();
         }
 
         if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            new BackstageItemUpdater().update(item);
-            return;
+            return new BackstageItemUpdater();
         }
 
         if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            new SulfurasItemUpdater().update(item);
-            return;
+            return new SulfurasItemUpdater();
         }
 
-        new NormalItemUpdater().update(item);
+        return new NormalItemUpdater();
     }
 }
