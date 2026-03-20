@@ -1,0 +1,23 @@
+---
+source: src/gildedrose.rs
+expression: "items.iter().zip(rose.items.iter()).map(|(before, after)|\n{ format!(\"{before} => {after}\") }).collect::<Vec<_>>().join(\"\\n\")"
+---
+foo, -1, -1 => foo, -2, -1
+another_item, -1, 1 => another_item, -2, 0
+Aged Brie, -1, 1 => Aged Brie, -2, 3
+Backstage passes to a TAFKAL80ETC concert, -1, 1 => Backstage passes to a TAFKAL80ETC concert, -2, 0
+another_item, -1, 49 => another_item, -2, 47
+Backstage passes to a TAFKAL80ETC concert, 12, 1 => Backstage passes to a TAFKAL80ETC concert, 11, 2
+Backstage passes to a TAFKAL80ETC concert, 12, 50 => Backstage passes to a TAFKAL80ETC concert, 11, 50
+Sulfuras, Hand of Ragnaros, -1, 1 => Sulfuras, Hand of Ragnaros, -1, 1
+Backstage passes to a TAFKAL80ETC concert, 9, 49 => Backstage passes to a TAFKAL80ETC concert, 8, 50
+Backstage passes to a TAFKAL80ETC concert, 5, 49 => Backstage passes to a TAFKAL80ETC concert, 4, 50
+Aged Brie, -1, 51 => Aged Brie, -2, 51
+foo, -1, 0 => foo, -2, 0
+Backstage passes to a TAFKAL80ETC concert, 11, 11 => Backstage passes to a TAFKAL80ETC concert, 10, 12
+Backstage passes to a TAFKAL80ETC concert, 9, 2 => Backstage passes to a TAFKAL80ETC concert, 8, 4
+Backstage passes to a TAFKAL80ETC concert, 6, 11 => Backstage passes to a TAFKAL80ETC concert, 5, 13
+Backstage passes to a TAFKAL80ETC concert, 5, 11 => Backstage passes to a TAFKAL80ETC concert, 4, 14
+Aged Brie, 1, 1 => Aged Brie, 0, 2
+Aged Brie, 0, 50 => Aged Brie, -1, 50
+foo, 2, 10 => foo, 1, 9

@@ -1,4 +1,6 @@
 use std::fmt::{self, Display};
+
+#[derive(Clone)]
 pub struct Item {
     pub name: String,
     pub sell_in: i32,
@@ -32,7 +34,8 @@ impl GildedRose {
 
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
-            if self.items[i].name != "Aged Brie" && self.items[i].name != "Backstage passes to a TAFKAL80ETC concert"
+            if self.items[i].name != "Aged Brie"
+                && self.items[i].name != "Backstage passes to a TAFKAL80ETC concert"
             {
                 if self.items[i].quality > 0 {
                     if self.items[i].name != "Sulfuras, Hand of Ragnaros" {
@@ -89,11 +92,36 @@ mod tests {
     use super::{GildedRose, Item};
 
     #[test]
-    pub fn foo() {
-        let items = vec![Item::new("foo", 0, 0)];
-        let mut rose = GildedRose::new(items);
+    pub fn test_update_quality() {
+        let items = vec![
+            Item::new("foo", -1, -1),
+            Item::new("another_item", -1, 1),
+            Item::new("Aged Brie", -1, 1),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", -1, 1),
+            Item::new("another_item", -1, 49),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 12, 1),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 12, 50),
+            Item::new("Sulfuras, Hand of Ragnaros", -1, 1),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 9, 49),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+            Item::new("Aged Brie", -1, 51),
+            Item::new("foo", -1, 0),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 11, 11),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 9, 2),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 6, 11),
+            Item::new("Backstage passes to a TAFKAL80ETC concert", 5, 11),
+            Item::new("Aged Brie", 1, 1),
+            Item::new("Aged Brie", 0, 50),
+            Item::new("foo", 2, 10),
+        ];
+        let mut rose = GildedRose::new(items.clone());
         rose.update_quality();
 
-        assert_eq!("fixme", rose.items[0].name);
+        insta::assert_snapshot!(items
+            .iter()
+            .zip(rose.items.iter())
+            .map(|(before, after)| { format!("{before} => {after}") })
+            .collect::<Vec<_>>()
+            .join("\n"));
     }
 }

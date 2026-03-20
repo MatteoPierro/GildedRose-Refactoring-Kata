@@ -1,1 +1,4 @@
 target/
+mutants.out*
+src/snapshots/*.new
+lcov.info
