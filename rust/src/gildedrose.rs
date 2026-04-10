@@ -48,6 +48,28 @@ impl GildedRose {
                         }
                     }
                 },
+                "Backstage passes to a TAFKAL80ETC concert" => {
+                    if item.quality < 50 {
+                        item.quality = item.quality + 1;
+
+                        if item.sell_in < 11 {
+                            if item.quality < 50 {
+                                item.quality = item.quality + 1;
+                            }
+                        }
+
+                        if item.sell_in < 6 {
+                            if item.quality < 50 {
+                                item.quality = item.quality + 1;
+                            }
+                        }
+                    }
+                    item.sell_in = item.sell_in - 1;
+
+                    if item.sell_in < 0 {
+                        item.quality = item.quality - item.quality;
+                    }
+                },
                 _ => (),
             }
         }
@@ -57,27 +79,7 @@ impl GildedRose {
             if self.items[i].name == "Aged Brie" {
 
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                if self.items[i].quality < 50 {
-                    self.items[i].quality = self.items[i].quality + 1;
-
-                    if self.items[i].sell_in < 11 {
-                        if self.items[i].quality < 50 {
-                            self.items[i].quality = self.items[i].quality + 1;
-                        }
-                    }
-
-                    if self.items[i].sell_in < 6 {
-                        if self.items[i].quality < 50 {
-                            self.items[i].quality = self.items[i].quality + 1;
-                        }
-                    }
-                }
-
-                self.items[i].sell_in = self.items[i].sell_in - 1;
-
-                if self.items[i].sell_in < 0 {
-                    self.items[i].quality = self.items[i].quality - self.items[i].quality;
-                }
+                
             } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
                 // EMPTY
             } else {
