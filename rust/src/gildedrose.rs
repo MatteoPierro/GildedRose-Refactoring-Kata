@@ -23,6 +23,63 @@ impl Display for Item {
     }
 }
 
+impl Item {
+    fn update_aged_brie(&mut self) {
+        if self.quality < 50 {
+            self.quality = self.quality + 1;
+        }
+
+        self.sell_in = self.sell_in - 1;
+
+        if self.sell_in < 0 {
+            if self.quality < 50 {
+                self.quality = self.quality + 1;
+            }
+        }
+    }
+
+    fn update_backstage_passes(&mut self) {
+        if self.quality < 50 {
+            self.quality = self.quality + 1;
+
+            if self.sell_in < 11 {
+                if self.quality < 50 {
+                    self.quality = self.quality + 1;
+                }
+            }
+
+            if self.sell_in < 6 {
+                if self.quality < 50 {
+                    self.quality = self.quality + 1;
+                }
+            }
+        }
+        self.sell_in = self.sell_in - 1;
+
+        if self.sell_in < 0 {
+            self.quality = self.quality - self.quality;
+        }
+    }
+
+    fn update_sulfuras(&self) {
+        ()
+    }
+
+    fn update_misc(&mut self) {
+        if self.quality > 0 {
+            self.quality = self.quality - 1;
+        }
+
+        self.sell_in = self.sell_in - 1;
+
+        if self.sell_in < 0 {
+            if self.quality > 0 {
+                self.quality = self.quality - 1;
+            }   
+        }
+    }
+}
+
 pub struct GildedRose {
     pub items: Vec<Item>,
 }
@@ -35,55 +92,10 @@ impl GildedRose {
     pub fn update_quality(&mut self) {
         for item in self.items.iter_mut() {
             match item.name.as_str() {
-                "Aged Brie" => {
-                    if item.quality < 50 {
-                        item.quality = item.quality + 1;
-                    }
-
-                    item.sell_in = item.sell_in - 1;
-
-                    if item.sell_in < 0 {
-                        if item.quality < 50 {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-                },
-                "Backstage passes to a TAFKAL80ETC concert" => {
-                    if item.quality < 50 {
-                        item.quality = item.quality + 1;
-
-                        if item.sell_in < 11 {
-                            if item.quality < 50 {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if item.sell_in < 6 {
-                            if item.quality < 50 {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                    item.sell_in = item.sell_in - 1;
-
-                    if item.sell_in < 0 {
-                        item.quality = item.quality - item.quality;
-                    }
-                },
-                "Sulfuras, Hand of Ragnaros" => (),
-                _ => {
-                    if item.quality > 0 {
-                        item.quality = item.quality - 1;
-                    }
-
-                    item.sell_in = item.sell_in - 1;
-
-                    if item.sell_in < 0 {
-                        if item.quality > 0 {
-                            item.quality = item.quality - 1;
-                        }   
-                    }
-                },
+                "Aged Brie" => item.update_aged_brie(),
+                "Backstage passes to a TAFKAL80ETC concert" => item.update_backstage_passes(),
+                "Sulfuras, Hand of Ragnaros" => item.update_sulfuras(),
+                _ => item.update_misc(),
             }
         }
     }
