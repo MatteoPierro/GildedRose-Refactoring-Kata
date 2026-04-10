@@ -70,30 +70,20 @@ impl GildedRose {
                         item.quality = item.quality - item.quality;
                     }
                 },
-                _ => (),
-            }
-        }
+                "Sulfuras, Hand of Ragnaros" => (),
+                _ => {
+                    if item.quality > 0 {
+                        item.quality = item.quality - 1;
+                    }
 
+                    item.sell_in = item.sell_in - 1;
 
-        for i in 0..self.items.len() {
-            if self.items[i].name == "Aged Brie" {
-
-            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                
-            } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                // EMPTY
-            } else {
-                if self.items[i].quality > 0 {
-                    self.items[i].quality = self.items[i].quality - 1;
-                }
-
-                self.items[i].sell_in = self.items[i].sell_in - 1;
-
-                if self.items[i].sell_in < 0 {
-                    if self.items[i].quality > 0 {
-                        self.items[i].quality = self.items[i].quality - 1;
-                    }   
-                }
+                    if item.sell_in < 0 {
+                        if item.quality > 0 {
+                            item.quality = item.quality - 1;
+                        }   
+                    }
+                },
             }
         }
     }
